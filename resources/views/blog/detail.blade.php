@@ -44,7 +44,7 @@
                         @endphp
 
                         <div class="nav d-flex justify-content-between p-3">
-                            <a href="{{ isset($previousArticle) ? route('detail',$previousArticle->id) : '#' }}"
+                            <a href="{{ isset($previousArticle) ? route('detail',$previousArticle->slug) : '#' }}"
                             class=" @empty($previousArticle) disabled @endempty btn btn-outline-primary page-mover rounded-circle">
                                 <i class="feather-chevron-left"></i>
                             </a>
@@ -53,7 +53,7 @@
                                 Read All
                             </a>
 
-                            <a href="{{ isset($nextArticle) ? route('detail',$nextArticle->id) : '#' }}"
+                            <a href="{{ isset($nextArticle) ? route('detail',$nextArticle->slug) : '#' }}"
                             class="@empty($nextArticle) disabled @endempty btn btn-outline-primary page-mover rounded-circle">
                                 <i class="feather-chevron-right"></i>
                             </a>

@@ -5,7 +5,7 @@
                               <div class="border-bottom mb-4 pb-4 article-preview">
                     <div class="p-0 p-md-3">
                         <a class="fw-bold h4 d-block text-decoration-none"
-                           href="{{ route('detail',$article->id) }}">
+                           href="{{ route('detail',$article->slug) }}">
                         {{ $article->title }}
                         </a>
 
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
 
-                            <a href="{{ route('detail',$article->id) }}" class="btn btn-outline-primary rounded-pill px-3">Read More</a>
+                            <a href="{{ route('detail',$article->slug) }}" class="btn btn-outline-primary rounded-pill px-3">Read More</a>
                         </div>
                     </div>
                 </div>
