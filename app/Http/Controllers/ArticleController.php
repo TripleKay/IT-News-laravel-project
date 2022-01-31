@@ -14,8 +14,22 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function apiIndex(){
+        $articles = Article::when(isset(request()->search),function($q){
+            $search = request()->search;
+            return $q->orwhere("title","like","%$search%")->orwhere("description","like","%$search%");
+        })->with(['user','category'])->latest("id")->paginate(7);
+        return $articles;
+    }
+
     public function index()
     {
+        // $all = Article::all();
+        // foreach($all as $a){
+        //     $a->excerpt = Str::words($a->description, 50);
+        //     $a->update();
+        // }
         // $articles = Article::all();
         $articles = Article::when(isset(request()->search),function($q){
             $search = request()->search;
@@ -52,6 +66,7 @@ class ArticleController extends Controller
        $article->slug = Str::slug($request->title)."-".uniqid();
        $article->category_id = $request->category;
        $article->description = $request->description;
+       $article->excerpt = Str::words($request->description, 50);
        $article->user_id = Auth::id();
        $article->save();
        return redirect()->route('article.index')->with("message","New Article Created");
@@ -99,6 +114,7 @@ class ArticleController extends Controller
        $article->title = $request->title;
        $article->category_id = $request->category;
        $article->description = $request->description;
+       $article->excerpt = Str::words($request->description, 50);
        $article->update();
        return redirect()->route('article.index')->with("message","Article Updated");
     }
