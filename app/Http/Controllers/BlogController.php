@@ -31,19 +31,12 @@ class BlogController extends Controller
         return view('welcome',compact('articles'));
     }
 
-    // public function baseOnUser($id){
-    //     $articles = Article::where('category_id',$id)->when(isset(request()->search),function($q){
-    //         $search = request()->search;
-    //         return $q->orwhere("title","like","%$search%")->orwhere("description","like","%$search%");
-    //     })->with(['user','category'])->latest("id")->paginate(7);
-    //     return view('welcome',compact('articles'));
-    // }
+    public function baseOnUser($id){
+        $articles = Article::when(isset(request()->search),function($q){
+            $search = request()->search;
+            return $q->orwhere("title","like","%$search%")->orwhere("description","like","%$search%");
+        })->where('user_id',$id)->with(['user','category'])->latest("id")->paginate(7);
+        return view('welcome',compact('articles'));
+    }
 
-    // public function baseOnDate($date){
-    //     $articles = Article::where('category_id',$date)->when(isset(request()->search),function($q){
-    //         $search = request()->search;
-    //         return $q->orwhere("title","like","%$search%")->orwhere("description","like","%$search%");
-    //     })->with(['user','category'])->latest("id")->paginate(7);
-    //     return view('welcome',compact('articles'));
-    // }
 }

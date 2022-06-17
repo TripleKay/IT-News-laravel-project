@@ -38,10 +38,13 @@
                                 @endif
 
                                 <div class="ms-2">
-                                    <span class="small">
+                                    <a href="{{ route('baseOnUser',$article->user->id) }}" class="small text-decoration-none">
                                         <i class="feather-user"></i>
                                         {{ $article->user->name }}
-                                    </span>
+                                    </a>
+                                    {{-- <span class="small">
+
+                                    </span> --}}
                                     <br>
                                     <span class="small">{{ $article->created_at->format("d F Y")}}</span>
                                 </div>
